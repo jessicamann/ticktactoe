@@ -42,7 +42,8 @@ public class TickTacToeGameTest {
     @Test
     public void shouldStoreAnXAtTheNumberedLocationUserIndicated(){
         // action
-        tickTacToeGame.drawX(7);
+        tickTacToeGame.currentPlayer = 1;
+        tickTacToeGame.drawMarkOnBoard(7);
 
         assertTrue(tickTacToeGame.spotAt(7).equals("X"));
     }
@@ -50,7 +51,8 @@ public class TickTacToeGameTest {
     @Test
     public void shouldPrintBoardWithAnXAtNumberedLocationUserIndicated(){
         // action
-        tickTacToeGame.drawX(7);
+        tickTacToeGame.currentPlayer = 1;
+        tickTacToeGame.drawMarkOnBoard(7);
 
         verify(printStream).print(
                         " | | \n" +
@@ -64,6 +66,16 @@ public class TickTacToeGameTest {
     public void shouldPrintPromptForUserToTypeInLocationNumberToMarkXWhenBeginToTakeInUserInput() throws IOException {
         // action
         when(reader.readLine()).thenReturn("7");
+        tickTacToeGame.getUserInput();
+
+        verify(printStream).print("Please enter the numeric spot (1-9) for where you'd like to place your mark: ");
+    }
+
+    @Test
+    public void shouldPromptPlayer2ForLocationNumberToMarkOAfterPlayer1HasEnteredXLocation() throws IOException {
+        // action
+        when(reader.readLine()).thenReturn("6");
+        tickTacToeGame.currentPlayer = 2;
         tickTacToeGame.getUserInput();
 
         verify(printStream).print("Please enter the numeric spot (1-9) for where you'd like to place your mark: ");

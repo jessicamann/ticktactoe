@@ -13,6 +13,7 @@ public class TickTacToeGame {
     private PrintStream printStream;
     private BufferedReader reader;
     private String gameBoard;
+    public int currentPlayer;
 
     public TickTacToeGame(PrintStream printStream, BufferedReader reader) {
 
@@ -22,6 +23,7 @@ public class TickTacToeGame {
         for(int i=0; i<9; i++){
             boardBlocks.add(" ");
         }
+        this.currentPlayer = 1;
     }
 
     public void createBoard() {
@@ -55,13 +57,17 @@ public class TickTacToeGame {
         getUserInput();
     }
 
-    public void drawX(int markSpot) {
-        boardBlocks.add(markSpot-1, "X");
+    public void drawMarkOnBoard(int markSpot) {
+        if(currentPlayer==1) {
+            boardBlocks.add(markSpot - 1, "X");
+        } else {
+            boardBlocks.add(markSpot - 1, "O");
+        }
         createBoard();
     }
 
     public String spotAt(int spotNumber) {
-        return boardBlocks.get(spotNumber);
+        return boardBlocks.get(spotNumber-1);
     }
 
     public void getUserInput() {
@@ -73,7 +79,7 @@ public class TickTacToeGame {
             e.printStackTrace();
         }
         if(spotOnBoard>0 && spotOnBoard<10){
-            drawX(spotOnBoard-1);
+            drawMarkOnBoard(spotOnBoard-1);
         }
     }
 
