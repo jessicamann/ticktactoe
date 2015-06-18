@@ -39,13 +39,13 @@ public class GameBoardTest {
     @Test
     public void shouldPrintBoardWithOneXWhenThereIsOnlyOneMarkMadeOnTheBoard(){
         // action
-        gameBoard.add(1, "X");
+        gameBoard.add(5, "X");
         gameBoard.printBoard();
 
         verify(printStream).print(
-                        "X| | \n" +
-                        "-----\n" +
                         " | | \n" +
+                        "-----\n" +
+                        " |X| \n" +
                         "-----\n" +
                         " | | \n");
     }

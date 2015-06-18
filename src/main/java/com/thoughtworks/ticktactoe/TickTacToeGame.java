@@ -30,9 +30,9 @@ public class TickTacToeGame {
 
     public void drawMarkOnBoard(int markSpot) {
         if(currentPlayer==1) {
-            gameBoard.add(markSpot-1, "X");
+            gameBoard.add(markSpot, "X");
         } else {
-            gameBoard.add(markSpot-1, "O");
+            gameBoard.add(markSpot, "O");
         }
         gameBoard.printBoard();
     }
