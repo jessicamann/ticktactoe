@@ -13,6 +13,7 @@ public class TickTacToeGame {
     private BufferedReader reader;
     private GameBoard gameBoard;
     public int currentPlayer;
+    private boolean gameAlive;
 
     public TickTacToeGame(PrintStream printStream, BufferedReader reader, GameBoard board) {
 
@@ -21,6 +22,7 @@ public class TickTacToeGame {
         this.gameBoard = board;
 
         this.currentPlayer = 1;
+        this.gameAlive = true;
     }
 
     public void startGame() {
@@ -28,7 +30,7 @@ public class TickTacToeGame {
         getUserInput();
     }
 
-    public void drawMarkOnBoard(int markSpot) {
+    public void addMarkToBoard(int markSpot) {
         if(currentPlayer==1) {
             gameBoard.add(markSpot, "X");
         } else {
@@ -38,21 +40,27 @@ public class TickTacToeGame {
     }
 
     public void getUserInput() {
+        while(gameAlive) {
+            printPrompt();
+            int spotOnBoard = -1;
+            try {
+                spotOnBoard = Integer.parseInt(reader.readLine());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (spotOnBoard > 0 && spotOnBoard < 10) {
+                addMarkToBoard(spotOnBoard);
+            }
+            currentPlayer %= 2;
+            currentPlayer += 1;
+        }
+    }
+
+    public void printPrompt() {
         if(currentPlayer==1){
             printStream.print("Player1, Please enter the numeric spot (1-9) for where you'd like to place your mark: ");
         } else{
             printStream.print("Player2, Please enter the numeric spot (1-9) for where you'd like to place your mark: ");
         }
-        int spotOnBoard = -1;
-        try {
-            spotOnBoard = Integer.parseInt(reader.readLine());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(spotOnBoard>0 && spotOnBoard<10){
-            drawMarkOnBoard(spotOnBoard);
-        }
-        currentPlayer%=2;
-        currentPlayer+=1;
     }
 }

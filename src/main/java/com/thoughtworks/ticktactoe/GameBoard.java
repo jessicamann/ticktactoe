@@ -2,12 +2,13 @@ package com.thoughtworks.ticktactoe;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jmann on 6/18/15.
  */
 public class GameBoard {
-    private ArrayList<String> boardArray;
+    private List<String> boardArray;
     private PrintStream printStream;
     private String board;
 
@@ -47,6 +48,6 @@ public class GameBoard {
     }
 
     public void add(int spotToAddMarkTo, String playerMark) {
-        boardArray.add(spotToAddMarkTo-1, playerMark);
+        boardArray.set(spotToAddMarkTo-1, playerMark);
     }
 }

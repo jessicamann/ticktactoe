@@ -1,4 +1,5 @@
 import com.thoughtworks.ticktactoe.GameBoard;
+import com.thoughtworks.ticktactoe.TickTacToeGame;
 import org.junit.Before;
 import org.junit.Test;
 
