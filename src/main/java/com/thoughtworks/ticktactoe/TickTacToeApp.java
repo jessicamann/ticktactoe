@@ -17,7 +17,6 @@ public class TickTacToeApp {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         TickTacToeGame game = new TickTacToeGame(System.out, reader);
         game.startGame();
-        game.drawX(7);
     }
 
     public void start() {

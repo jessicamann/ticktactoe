@@ -1,6 +1,7 @@
 package com.thoughtworks.ticktactoe;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
@@ -22,14 +23,6 @@ public class TickTacToeGame {
             boardBlocks.add(" ");
         }
     }
-
-
-//    public void printBoard() {
-//        createBoard();
-//        printStream.print(gameBoard);
-//        System.out.println();
-//        System.out.println();
-//    }
 
     public void createBoard() {
         gameBoard = "";
@@ -59,10 +52,11 @@ public class TickTacToeGame {
 
     public void startGame() {
         createBoard();
+        getUserInput();
     }
 
     public void drawX(int markSpot) {
-        boardBlocks.add(markSpot, "X");
+        boardBlocks.add(markSpot-1, "X");
         createBoard();
     }
 
@@ -71,6 +65,17 @@ public class TickTacToeGame {
     }
 
     public void getUserInput() {
-
+        printStream.print("Please enter the numeric spot (1-9) for where you'd like to place your mark: ");
+        int spotOnBoard = -1;
+        try {
+            spotOnBoard = Integer.parseInt(reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(spotOnBoard>0 && spotOnBoard<10){
+            drawX(spotOnBoard-1);
+        }
     }
+
+
 }

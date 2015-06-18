@@ -1,4 +1,5 @@
 import com.thoughtworks.ticktactoe.TickTacToeGame;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
@@ -12,13 +13,20 @@ import static org.mockito.Mockito.when;
  * Created by jmann on 6/18/15.
  */
 public class TickTacToeGameTest {
+    PrintStream printStream;
+    BufferedReader reader;
+    TickTacToeGame tickTacToeGame;
+
+    @Before
+    public void setup(){
+        // setup
+        printStream = mock(PrintStream.class);
+        reader = mock(BufferedReader.class);
+        tickTacToeGame = new TickTacToeGame(printStream, reader);
+    }
+
     @Test
     public void shouldPrintAThreeByThreeBoardWhenGameStarts(){
-        // setup
-        PrintStream printStream = mock(PrintStream.class);
-        BufferedReader reader = mock(BufferedReader.class);
-        TickTacToeGame tickTacToeGame = new TickTacToeGame(printStream, reader);
-
         // action
         tickTacToeGame.createBoard();
 
@@ -33,11 +41,6 @@ public class TickTacToeGameTest {
 
     @Test
     public void shouldStoreAnXAtTheNumberedLocationUserIndicated(){
-        // setup
-        PrintStream printStream = mock(PrintStream.class);
-        BufferedReader reader = mock(BufferedReader.class);
-        TickTacToeGame tickTacToeGame = new TickTacToeGame(printStream, reader);
-
         // action
         tickTacToeGame.drawX(7);
 
@@ -46,11 +49,6 @@ public class TickTacToeGameTest {
 
     @Test
     public void shouldPrintBoardWithAnXAtNumberedLocationUserIndicated(){
-        // setup
-        PrintStream printStream = mock(PrintStream.class);
-        BufferedReader reader = mock(BufferedReader.class);
-        TickTacToeGame tickTacToeGame = new TickTacToeGame(printStream, reader);
-
         // action
         tickTacToeGame.drawX(7);
 
@@ -59,22 +57,17 @@ public class TickTacToeGameTest {
                         "-----\n" +
                         " | | \n" +
                         "-----\n" +
-                        " |X| \n");
+                        "X| | \n");
     }
 
-//    @Test
-//    public void shouldGetUserInputWhenUserTypesItOntoTheConsole() throws IOException {
-//        // setup
-//        PrintStream printStream = mock(PrintStream.class);
-//        BufferedReader reader = mock(BufferedReader.class);
-//        TickTacToeGame tickTacToeGame = new TickTacToeGame(printStream, reader);
-//
-//        // action
-//        when(reader.readLine()).thenReturn("7");
-//        tickTacToeGame.getUserInput();
-//
-//        assertTrue(tickTacToeGame.spotAt(7)=="X");
-//    }
+    @Test
+    public void shouldPrintPromptForUserToTypeInLocationNumberToMarkXWhenBeginToTakeInUserInput() throws IOException {
+        // action
+        when(reader.readLine()).thenReturn("7");
+        tickTacToeGame.getUserInput();
+
+        verify(printStream).print("Please enter the numeric spot (1-9) for where you'd like to place your mark: ");
+    }
 
 
 }
