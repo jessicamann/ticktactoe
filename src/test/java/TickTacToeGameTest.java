@@ -58,6 +58,10 @@ public class TickTacToeGameTest {
         assertEquals(2, tickTacToeGame.currentPlayer);
     }
 
+    @Test
+    public void shouldPromptPlayerToInputAgainIfTheSpotNumberEnteredIsAlreadyTaken(){
+
+    }
 
 
 }
