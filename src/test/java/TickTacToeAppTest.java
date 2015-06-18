@@ -1,3 +1,4 @@
+import com.thoughtworks.ticktactoe.GameBoard;
 import com.thoughtworks.ticktactoe.TickTacToeApp;
 import com.thoughtworks.ticktactoe.TickTacToeGame;
 import org.junit.Test;
@@ -10,11 +11,14 @@ import static org.mockito.Mockito.verify;
  */
 public class TickTacToeAppTest {
     @Test
-    public void shouldCreateBoardWhenAppStarts(){
+    public void shouldStartANewGameWhenAppStarts(){
+        GameBoard gameBoard = mock(GameBoard.class);
         TickTacToeGame tickTacToeGame = mock(TickTacToeGame.class);
         TickTacToeApp tickTacToeApp = new TickTacToeApp(tickTacToeGame);
+
         tickTacToeApp.start();
-        verify(tickTacToeGame).createBoard();
+
+        verify(tickTacToeGame).startGame();
     }
 
 }

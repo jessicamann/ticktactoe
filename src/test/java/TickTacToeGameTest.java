@@ -1,3 +1,4 @@
+import com.thoughtworks.ticktactoe.GameBoard;
 import com.thoughtworks.ticktactoe.TickTacToeGame;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,50 +18,15 @@ public class TickTacToeGameTest {
     PrintStream printStream;
     BufferedReader reader;
     TickTacToeGame tickTacToeGame;
+    GameBoard board;
 
     @Before
     public void setup(){
         // setup
         printStream = mock(PrintStream.class);
         reader = mock(BufferedReader.class);
-        tickTacToeGame = new TickTacToeGame(printStream, reader);
-    }
-
-    @Test
-    public void shouldPrintAThreeByThreeBoardWhenGameStarts(){
-        // action
-        tickTacToeGame.createBoard();
-
-        verify(printStream).print(
-                                " | | \n" +
-                                "-----\n" +
-                                " | | \n" +
-                                "-----\n" +
-                                " | | \n");
-
-    }
-
-    @Test
-    public void shouldStoreAnXAtTheNumberedLocationUserIndicated(){
-        // action
-        tickTacToeGame.currentPlayer = 1;
-        tickTacToeGame.drawMarkOnBoard(7);
-
-        assertTrue(tickTacToeGame.spotAt(7).equals("X"));
-    }
-
-    @Test
-    public void shouldPrintBoardWithAnXAtNumberedLocationUserIndicated(){
-        // action
-        tickTacToeGame.currentPlayer = 1;
-        tickTacToeGame.drawMarkOnBoard(7);
-
-        verify(printStream).print(
-                        " | | \n" +
-                        "-----\n" +
-                        " | | \n" +
-                        "-----\n" +
-                        "X| | \n");
+        board = mock(GameBoard.class);
+        tickTacToeGame = new TickTacToeGame(printStream, reader, board);
     }
 
     @Test
@@ -73,7 +39,7 @@ public class TickTacToeGameTest {
     }
 
     @Test
-    public void shouldPromptPlayer2ForLocationNumberToMarkOAfterPlayer1HasEnteredXLocation() throws IOException {
+    public void shouldPromptPlayer2ForLocationNumberToMarkOIfItIsPlayerTwosTurn() throws IOException {
         // action
         when(reader.readLine()).thenReturn("6");
         tickTacToeGame.currentPlayer = 2;
@@ -91,4 +57,7 @@ public class TickTacToeGameTest {
 
         assertEquals(2, tickTacToeGame.currentPlayer);
     }
+
+
+
 }
