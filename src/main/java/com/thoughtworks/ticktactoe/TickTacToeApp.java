@@ -11,7 +11,7 @@ public class TickTacToeApp {
     }
 
     public static void main(String[] args){
-        TickTacToeGame game = new TickTacToeGame();
+        TickTacToeGame game = new TickTacToeGame(System.out);
         game.startGame();
     }
 
