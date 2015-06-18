@@ -1,5 +1,8 @@
 package com.thoughtworks.ticktactoe;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 /**
  * Created by jmann on 6/18/15.
  */
@@ -11,8 +14,10 @@ public class TickTacToeApp {
     }
 
     public static void main(String[] args){
-        TickTacToeGame game = new TickTacToeGame(System.out);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        TickTacToeGame game = new TickTacToeGame(System.out, reader);
         game.startGame();
+        game.drawX(7);
     }
 
     public void start() {

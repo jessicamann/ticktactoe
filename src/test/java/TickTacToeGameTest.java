@@ -1,45 +1,80 @@
 import com.thoughtworks.ticktactoe.TickTacToeGame;
 import org.junit.Test;
 
-import java.io.PrintStream;
+import java.io.*;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by jmann on 6/18/15.
  */
 public class TickTacToeGameTest {
     @Test
-    public void shouldCreateAThreeByThreeBoardWhenGameStarts(){
+    public void shouldPrintAThreeByThreeBoardWhenGameStarts(){
         // setup
         PrintStream printStream = mock(PrintStream.class);
-        TickTacToeGame tickTacToeGame = new TickTacToeGame(printStream);
+        BufferedReader reader = mock(BufferedReader.class);
+        TickTacToeGame tickTacToeGame = new TickTacToeGame(printStream, reader);
 
         // action
         tickTacToeGame.createBoard();
 
         verify(printStream).print(
-                        "       |       |       \n" +
-                        "-----------------------\n" +
-                        "       |       |       \n" +
-                        "-----------------------\n" +
-                        "       |       |       \n");
+                                " | | \n" +
+                                "-----\n" +
+                                " | | \n" +
+                                "-----\n" +
+                                " | | \n");
 
     }
 
     @Test
-    public void shouldCreateAnXAtTheNumberedLocationUserIndicated(){
+    public void shouldStoreAnXAtTheNumberedLocationUserIndicated(){
         // setup
         PrintStream printStream = mock(PrintStream.class);
-        TickTacToeGame tickTacToeGame = new TickTacToeGame(printStream);
+        BufferedReader reader = mock(BufferedReader.class);
+        TickTacToeGame tickTacToeGame = new TickTacToeGame(printStream, reader);
 
         // action
         tickTacToeGame.drawX(7);
 
         assertTrue(tickTacToeGame.spotAt(7).equals("X"));
     }
+
+    @Test
+    public void shouldPrintBoardWithAnXAtNumberedLocationUserIndicated(){
+        // setup
+        PrintStream printStream = mock(PrintStream.class);
+        BufferedReader reader = mock(BufferedReader.class);
+        TickTacToeGame tickTacToeGame = new TickTacToeGame(printStream, reader);
+
+        // action
+        tickTacToeGame.drawX(7);
+
+        verify(printStream).print(
+                        " | | \n" +
+                        "-----\n" +
+                        " | | \n" +
+                        "-----\n" +
+                        " |X| \n");
+    }
+
+//    @Test
+//    public void shouldGetUserInputWhenUserTypesItOntoTheConsole() throws IOException {
+//        // setup
+//        PrintStream printStream = mock(PrintStream.class);
+//        BufferedReader reader = mock(BufferedReader.class);
+//        TickTacToeGame tickTacToeGame = new TickTacToeGame(printStream, reader);
+//
+//        // action
+//        when(reader.readLine()).thenReturn("7");
+//        tickTacToeGame.getUserInput();
+//
+//        assertTrue(tickTacToeGame.spotAt(7)=="X");
+//    }
 
 
 }
