@@ -59,9 +59,9 @@ public class TickTacToeGame {
 
     public void drawMarkOnBoard(int markSpot) {
         if(currentPlayer==1) {
-            boardBlocks.add(markSpot - 1, "X");
+            boardBlocks.add(markSpot-1, "X");
         } else {
-            boardBlocks.add(markSpot - 1, "O");
+            boardBlocks.add(markSpot-1, "O");
         }
         createBoard();
     }
@@ -71,7 +71,11 @@ public class TickTacToeGame {
     }
 
     public void getUserInput() {
-        printStream.print("Please enter the numeric spot (1-9) for where you'd like to place your mark: ");
+        if(currentPlayer==1){
+            printStream.print("Player1, Please enter the numeric spot (1-9) for where you'd like to place your mark: ");
+        } else{
+            printStream.print("Player2, Please enter the numeric spot (1-9) for where you'd like to place your mark: ");
+        }
         int spotOnBoard = -1;
         try {
             spotOnBoard = Integer.parseInt(reader.readLine());
@@ -79,8 +83,10 @@ public class TickTacToeGame {
             e.printStackTrace();
         }
         if(spotOnBoard>0 && spotOnBoard<10){
-            drawMarkOnBoard(spotOnBoard-1);
+            drawMarkOnBoard(spotOnBoard);
         }
+        currentPlayer%=2;
+        currentPlayer+=1;
     }
 
 

@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.io.*;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -68,7 +69,7 @@ public class TickTacToeGameTest {
         when(reader.readLine()).thenReturn("7");
         tickTacToeGame.getUserInput();
 
-        verify(printStream).print("Please enter the numeric spot (1-9) for where you'd like to place your mark: ");
+        verify(printStream).print("Player1, Please enter the numeric spot (1-9) for where you'd like to place your mark: ");
     }
 
     @Test
@@ -78,8 +79,16 @@ public class TickTacToeGameTest {
         tickTacToeGame.currentPlayer = 2;
         tickTacToeGame.getUserInput();
 
-        verify(printStream).print("Please enter the numeric spot (1-9) for where you'd like to place your mark: ");
+        verify(printStream).print("Player2, Please enter the numeric spot (1-9) for where you'd like to place your mark: ");
     }
 
+    @Test
+    public void shouldSwitchPlayerFromOneToTwoAfterPlayerOneHasInputtedLocationToMark() throws IOException {
+        // action
+        when(reader.readLine()).thenReturn("6");
+        tickTacToeGame.currentPlayer = 1;
+        tickTacToeGame.getUserInput();
 
+        assertEquals(2, tickTacToeGame.currentPlayer);
+    }
 }
