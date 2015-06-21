@@ -32,20 +32,20 @@ public class TickTacToeGameTest {
     public void shouldPrintABoardWhenGameStarts(){
         tickTacToeGame.startGame();
 
-        verify(board, times(3)).printBoard();
+        verify(board, times(10)).printBoard();
     }
 
     @Test
     public void shouldTellPlayerOneToMakeMoveWhenGameStarts(){
         tickTacToeGame.startGame();
 
-        verify(player1).move();
+        verify(player1, times(5)).move();
     }
 
     @Test
     public void shouldTellPlayerTwoToMakeMoveWhenPlayerOneHasFinished() {
         tickTacToeGame.startGame();
 
-        verify(player2).move();
+        verify(player2, times(4)).move();
     }
 }

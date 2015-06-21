@@ -11,6 +11,7 @@ public class GameBoard {
     private List<String> cells;
     private PrintStream printStream;
     private String board;
+    private int emptyCells;
 
     public GameBoard(PrintStream printStream, List<String> cells) {
 
@@ -19,6 +20,7 @@ public class GameBoard {
                 " ", " "," ",
                 " ", " "," ",
                 " ", " "," ");
+        emptyCells = 9;
     }
 
     public void printBoard() {
@@ -38,10 +40,15 @@ public class GameBoard {
     public void mark(int position, String playerSymbol) {
 
         cells.set(position - 1, playerSymbol);
+        emptyCells ++;
     }
 
 
     public boolean cellNotTaken(int position) {
         return cells.get(position-1).equals(" ");
+    }
+
+    public boolean isFilled(){
+        return emptyCells!=0;
     }
 }

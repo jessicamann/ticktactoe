@@ -81,4 +81,16 @@ public class GameBoardTest {
 
         assertThat(isNotTaken, is(true));
     }
+
+    @Test
+    public void shouldTellGameBoardIsFilledWhenAllCellsAreMarked(){
+        for(int i=1; i<10; i++){
+            gameBoard.mark(i, "X");
+        }
+        boolean isFilled = gameBoard.isFilled();
+
+        assertThat(isFilled, is(true));
+    }
+
+
 }

@@ -16,7 +16,6 @@ public class TickTacToeGame {
 
     public TickTacToeGame(GameBoard board, Player player1, Player player2, Player currentPlayer) {
 
-
         this.gameBoard = board;
         this.player1 = player1;
         this.player2 = player2;
@@ -29,7 +28,29 @@ public class TickTacToeGame {
 
         player1.move();
         gameBoard.printBoard();
+
         player2.move();
+        gameBoard.printBoard();
+
+        player1.move();
+        gameBoard.printBoard();
+
+        player2.move();
+        gameBoard.printBoard();
+
+        player1.move();
+        gameBoard.printBoard();
+
+        player2.move();
+        gameBoard.printBoard();
+
+        player1.move();
+        gameBoard.printBoard();
+
+        player2.move();
+        gameBoard.printBoard();
+
+        player1.move();
         gameBoard.printBoard();
     }
 }
