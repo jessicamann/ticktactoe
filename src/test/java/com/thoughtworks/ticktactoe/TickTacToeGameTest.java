@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import java.io.*;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
@@ -43,18 +42,10 @@ public class TickTacToeGameTest {
         verify(player1).move();
     }
 
-//    @Test
-//    public void shouldRePrintBoardWithNewMarkWhenCurrentPlayerMadeAMove(){
-//        tickTacToeGame.nextTurn();
-//
-//        verify(currentPlayer).move();
-//        verify(board).printBoard();
-//    }
-//
-//    @Test
-//    public void shouldSwitchFromPlayerOneToPlayerTwoWhenPlayerOneHasHadItsTurn(){
-//        tickTacToeGame.switchPlayer();
-//
-//        assertEquals(player2, currentPlayer);
-//    }
+    @Test
+    public void shouldTellPlayerTwoToMakeMoveWhenPlayerOneHasFinished() {
+        tickTacToeGame.startGame();
+
+        verify(player2).move();
+    }
 }

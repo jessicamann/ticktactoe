@@ -32,7 +32,8 @@ public class PlayerTest {
 
     @Test
     public void shouldPromptPlayer1ForMoveWhenasdlkfjasd() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("-1");
+        when(bufferedReader.readLine()).thenReturn("1");
+        when(gameBoard.cellNotTaken(1)).thenReturn(true);
         player.move();
 
         verify(printStream).println("Player1, please enter a number between 1 and 9");
@@ -41,6 +42,7 @@ public class PlayerTest {
     @Test
     public void shouldSetPositionOnBoardWithAnXWhenPlayer1EntersANumber() throws IOException {
         when(bufferedReader.readLine()).thenReturn("1");
+        when(gameBoard.cellNotTaken(1)).thenReturn(true);
         player.move();
 
         verify(gameBoard).mark(1, "X");
@@ -49,6 +51,7 @@ public class PlayerTest {
     @Test
     public void shouldSetPositionOnBoardWithAnOWhenPlayer2EntersANumber() throws IOException {
         when(bufferedReader.readLine()).thenReturn("1");
+        when(gameBoard.cellNotTaken(1)).thenReturn(true);
         Player player2 = new Player(printStream, bufferedReader, gameBoard, "O", 2);
         player2.move();
 
@@ -57,11 +60,21 @@ public class PlayerTest {
 
     @Test
     public void shouldPromptPlayer2ForMoveWhenasldkfjsd() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("-1");
+        when(bufferedReader.readLine()).thenReturn("1");
+        when(gameBoard.cellNotTaken(1)).thenReturn(true);
         Player player2 = new Player(printStream, bufferedReader, gameBoard, "O", 2);
         player2.move();
 
         verify(printStream).println("Player2, please enter a number between 1 and 9");
+    }
+
+    @Test
+    public void shouldTellPlayerLocationIsTakenWhenPlayerInputsACellNumberThatIsAlreadyMarked() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("1");
+        when(gameBoard.cellNotTaken(1)).thenReturn(false, true);
+        player.move();
+
+        verify(printStream).println("Location already taken");
     }
 
 }

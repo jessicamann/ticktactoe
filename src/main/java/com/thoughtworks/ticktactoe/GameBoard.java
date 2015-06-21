@@ -1,7 +1,6 @@
 package com.thoughtworks.ticktactoe;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,5 +38,10 @@ public class GameBoard {
     public void mark(int position, String playerSymbol) {
 
         cells.set(position - 1, playerSymbol);
+    }
+
+
+    public boolean cellNotTaken(int position) {
+        return cells.get(position-1).equals(" ");
     }
 }

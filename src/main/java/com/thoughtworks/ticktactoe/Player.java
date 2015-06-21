@@ -28,7 +28,12 @@ public class Player {
 
         int position = readLine();
 
-        gameBoard.mark(position, symbol);
+        if(gameBoard.cellNotTaken(position)) {
+            gameBoard.mark(position, symbol);
+        } else {
+            printStream.println("Location already taken");
+            move();
+        }
     }
 
     private int readLine() {

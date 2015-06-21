@@ -43,7 +43,7 @@ public class GameBoardTest {
     }
 
     @Test
-    public void shouldSetPositionZeroOfBoardToXWhenPlayerOneMarksPositionOne(){
+    public void shouldSetCellZeroOfBoardToXWhenPlayerOneMarksPositionOne(){
         gameBoard.mark(1, "X");
 
         assertThat(cells.get(0), is("X"));
@@ -62,5 +62,23 @@ public class GameBoardTest {
                 "4|5|6\n" +
                 "-----\n" +
                 "7|8|9\n");
+    }
+
+    @Test
+    public void shouldTellGameThatCellZeroIsTakenWhenPositionOneOnBoardIsAlreadyMarked(){
+        cells.set(0, "X");
+
+        boolean isNotTaken = gameBoard.cellNotTaken(1);
+
+        assertThat(isNotTaken, is(false));  //something weird is happening with java passing reference/value
+    }
+
+    @Test
+    public void shouldTellGameThatCellZeroIsNotTakenWhenPositionOneOnBoardIsNotMarked() {
+        cells.set(0, "X");
+
+        boolean isNotTaken = gameBoard.cellNotTaken(2);
+
+        assertThat(isNotTaken, is(true));
     }
 }
