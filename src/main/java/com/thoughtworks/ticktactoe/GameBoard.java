@@ -2,52 +2,42 @@ package com.thoughtworks.ticktactoe;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by jmann on 6/18/15.
  */
 public class GameBoard {
-    private List<String> boardArray;
+    private List<String> cells;
     private PrintStream printStream;
     private String board;
 
-    public GameBoard(PrintStream printStream) {
+    public GameBoard(PrintStream printStream, List<String> cells) {
 
         this.printStream = printStream;
-        this.boardArray = new ArrayList<String>();
-        for(int i=0; i<9; i++){
-            this.boardArray.add(" ");
-        }
+        this.cells = Arrays.asList(
+                " ", " "," ",
+                " ", " "," ",
+                " ", " "," ");
     }
 
     public void printBoard() {
-        board = "";
+        board = String.format(
+                "%s|%s|%s\n"+
+                "-----\n"+
+                "%s|%s|%s\n"+
+                "-----\n"+
+                "%s|%s|%s\n",
+                cells.get(0), cells.get(1), cells.get(2),
+                cells.get(3), cells.get(4), cells.get(5),
+                cells.get(6), cells.get(7), cells.get(8));
 
-        createBoardRow(1);
-        createLine();
-        createBoardRow(2);
-        createLine();
-        createBoardRow(3);
-
-        printStream.print(board);
-        System.out.println();
-        System.out.println();
+        printStream.println(board);
     }
 
-    private void createLine() {
-        board += "-----\n";
-    }
+    public void mark(int position, String playerSymbol) {
 
-    private void createBoardRow(int row) {
-        board += boardArray.get(row*3-3);
-        board += "|";
-        board += boardArray.get(row*3-2);
-        board += "|";
-        board += boardArray.get(row*3-1)+"\n";
-    }
-
-    public void add(int spotToAddMarkTo, String playerMark) {
-        boardArray.set(spotToAddMarkTo-1, playerMark);
+        cells.set(position - 1, playerSymbol);
     }
 }
