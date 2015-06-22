@@ -16,7 +16,6 @@ public class TickTacToeGameTest {
     private GameBoard board;
     private Player player1;
     private Player player2;
-    private Player currentPlayer;
 
     @Before
     public void setup(){
@@ -24,8 +23,7 @@ public class TickTacToeGameTest {
         board = mock(GameBoard.class);
         player1 = mock(Player.class);
         player2 = mock(Player.class);
-        currentPlayer = player1;
-        tickTacToeGame = new TickTacToeGame(board, player1, player2, currentPlayer);
+        tickTacToeGame = new TickTacToeGame(board, player1, player2);
     }
 
     @Test
@@ -47,5 +45,10 @@ public class TickTacToeGameTest {
         tickTacToeGame.startGame();
 
         verify(player2, times(4)).move();
+    }
+
+    @Test
+    public void shouldAlternateFromPlayerOneToPlayerTwoWhenPlayerOneHasFinished(){
+
     }
 }

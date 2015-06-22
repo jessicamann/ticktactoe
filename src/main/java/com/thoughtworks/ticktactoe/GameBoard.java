@@ -40,7 +40,7 @@ public class GameBoard {
     public void mark(int position, String playerSymbol) {
 
         cells.set(position - 1, playerSymbol);
-        emptyCells ++;
+        emptyCells --;
     }
 
 
@@ -49,6 +49,6 @@ public class GameBoard {
     }
 
     public boolean isFilled(){
-        return emptyCells!=0;
+        return emptyCells==0;
     }
 }

@@ -23,7 +23,7 @@ public class TickTacToeApp {
         GameBoard gameBoard = new GameBoard(printStream, cells);
         Player player1 = new Player(printStream, reader, gameBoard, "X", 1);
         Player player2 = new Player(printStream, reader, gameBoard, "O", 2);
-        TickTacToeGame game = new TickTacToeGame(gameBoard, player1, player2, player1);
+        TickTacToeGame game = new TickTacToeGame(gameBoard, player1, player2);
         game.startGame();
     }
 }
